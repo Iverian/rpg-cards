@@ -84,7 +84,7 @@ function card_data_split_params(value) {
     return value.split("|").map(function (str) { return str.trim(); });
 }
 
-function card_element_class(card_data, options) {    
+function card_element_class(card_data, options) {
     var card_font_size_class = card_size_class(card_data, options);
     return 'card-element card-description-line' + card_font_size_class;
 }
@@ -105,7 +105,7 @@ function card_element_title(card_data, options) {
 }
 
 function card_element_icon(card_data, options) {
-    var icons = card_data_icon_front(card_data, options).split(/[\s\uFEFF\xA0]+/).filter(icon=>icon);
+    var icons = card_data_icon_front(card_data, options).split(/[\s\uFEFF\xA0]+/).filter(icon => icon);
     var classname = "icon";
     if (options.icon_inline) {
         classname = "inlineicon";
@@ -113,7 +113,7 @@ function card_element_icon(card_data, options) {
 
     var result = "";
     result += '<div class="card-title-' + classname + '-container">';
-    icons.forEach(function(icon){
+    icons.forEach(function (icon) {
         result += '    <img class="card-title-' + classname + ' icon-' + icon + '" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">';
     });
     result += '</div>';
@@ -123,10 +123,9 @@ function card_element_icon(card_data, options) {
 function card_element_subtitle(params, card_data, options) {
     var subtitle = params[0] || "";
     var result = '<div class="card-element card-subtitle">';
-    if (params[1])
-	{
-		result += '<div style="float:right">' + params[1] + '</div>';
-	}
+    if (params[1]) {
+        result += '<div style="float:right">' + params[1] + '</div>';
+    }
     result += '<div>' + subtitle + '</div>';
     result += '</div>';
     return result;
@@ -200,13 +199,12 @@ function card_element_property(params, card_data, options) {
     result += '<div class="card-element card-property-line' + card_font_size_class + '">';
     result += '   <h4 class="card-property-name">' + params[0] + '</h4>';
     result += '   <p class="card-p card-property-text">' + params[1] + '</p>';
-	if (params[2])
-	{
-		result += '   <div style="float:right">';
-		result += '       <h4 class="card-property-name">' + params[2] + '</h4>';
-		result += '       <p class="card-p card-property-text">' + params[3] + '</p>';
-		result += '   </div>';
-	}
+    if (params[2]) {
+        result += '   <div style="float:right">';
+        result += '       <h4 class="card-property-name">' + params[2] + '</h4>';
+        result += '       <p class="card-p card-property-text">' + params[3] + '</p>';
+        result += '   </div>';
+    }
     result += '</div>';
     return result;
 }
@@ -254,7 +252,7 @@ function card_element_justify(params, card_data, options) {
 
 function card_element_dndstats(params, card_data, options) {
     var stats = [10, 10, 10, 10, 10, 10];
-    var mods = [0,0,0,0,0,0];
+    var mods = [0, 0, 0, 0, 0, 0];
     for (var i = 0; i < 6; ++i) {
         stats[i] = parseInt(params[i], 10) || 0;
         var mod = Math.floor(((stats[i] - 10) / 2));
@@ -270,12 +268,12 @@ function card_element_dndstats(params, card_data, options) {
     var result = "";
     result += '<table class="card-stats' + card_font_size_class + '">';
     result += '    <tbody><tr>';
-    result += '      <th class="card-stats-header">STR</th>';
-    result += '      <th class="card-stats-header">DEX</th>';
-    result += '      <th class="card-stats-header">CON</th>';
-    result += '      <th class="card-stats-header">INT</th>';
-    result += '      <th class="card-stats-header">WIS</th>';
-    result += '      <th class="card-stats-header">CHA</th>';
+    result += '      <th class="card-stats-header">СИЛ</th>';
+    result += '      <th class="card-stats-header">ЛОВ</th>';
+    result += '      <th class="card-stats-header">ТЕЛ</th>';
+    result += '      <th class="card-stats-header">ИНТ</th>';
+    result += '      <th class="card-stats-header">МДР</th>';
+    result += '      <th class="card-stats-header">ХАР</th>';
     result += '    </tr>';
     result += '    <tr>';
     result += '      <td class="card-stats-cell">' + stats[0] + mods[0] + '</td>';
@@ -330,7 +328,7 @@ function card_element_p2e_trait(params, card_data, options) {
 
 function card_element_p2e_activity(params, card_data, options) {
     var card_font_size_class = card_size_class(card_data, options);
-    
+
     var activity_icon;
     if (params[1] == '0') {
         activity_icon = 'icon-p2e-free-action';
@@ -342,7 +340,7 @@ function card_element_p2e_activity(params, card_data, options) {
         activity_icon = 'icon-p2e-3-actions';
     } else if (params[1] == 'R') {
         activity_icon = 'icon-p2e-reaction';
-    } 
+    }
 
     var result = "";
     result += '<div class="card-element card-property-line' + card_font_size_class + '">';
@@ -404,10 +402,9 @@ function card_element_section(params, card_data, options) {
     var section = params[0] || "";
 
     var result = '<h3 class="card-section" style="color:' + color + '">';
-    if (params[1])
-	{
-		result += '<div style="float:right">' + params[1]+ '</div>';
-	}
+    if (params[1]) {
+        result += '<div style="float:right">' + params[1] + '</div>';
+    }
     result += '<div>' + section + '</div>';
     result += '</h3>';
 
@@ -460,7 +457,7 @@ var card_element_generators = {
 
 function card_generate_contents(contents, card_data, options) {
     var result = "";
-   
+
     var html = contents.map(function (value) {
         var parts = card_data_split_params(value);
         var element_name = parts[0];
@@ -475,42 +472,42 @@ function card_generate_contents(contents, card_data, options) {
 
     var tagNames = ['icon'];
 
-    tagNames.forEach(function(tagName){
-        var tagRegExp = new RegExp('<'+tagName+'[^>]*>', 'g');
+    tagNames.forEach(function (tagName) {
+        var tagRegExp = new RegExp('<' + tagName + '[^>]*>', 'g');
         var attrRegExp = new RegExp('([\\w-]+)="([^"]+)"', 'g')
 
         var matches = [];
-        forEachMatch(tagRegExp, html, function(m){
+        forEachMatch(tagRegExp, html, function (m) {
             matches.push(m);
         });
         if (!matches.length) return null;
 
         var tagResults = new Array(matches.length);
-        matches.forEach(function(match, i){
+        matches.forEach(function (match, i) {
             if (tagName === 'icon') {
                 var attrs = {};
-                forEachMatch(attrRegExp, match[0], function(m,i){
+                forEachMatch(attrRegExp, match[0], function (m, i) {
                     var attrName = m[1];
                     var attrValue = m[2];
                     if (attrName === 'name') {
-                        if(!attrs.class) attrs.class = '';
+                        if (!attrs.class) attrs.class = '';
                         attrs.class += 'game-icon game-icon-' + attrValue;
                     }
                     else if (attrName === 'size') {
-                        if(!attrs.style) attrs.style = '';
+                        if (!attrs.style) attrs.style = '';
                         attrs.style += 'font-size:' + attrValue + 'pt;';
                     }
                 });
-                forEachMatch(attrRegExp, match[0], function(m,i){
+                forEachMatch(attrRegExp, match[0], function (m, i) {
                     var attrName = m[1];
                     var attrValue = m[2];
                     if (attrName === 'style') {
-                        if(!attrs.style) attrs.style = '';
+                        if (!attrs.style) attrs.style = '';
                         attrs.style += attrValue;
                     }
                 });
                 var tagResult = '<i';
-                Object.keys(attrs).forEach(function(k){
+                Object.keys(attrs).forEach(function (k) {
                     tagResult += ' ' + k + '="' + attrs[k] + '"';
                 });
                 tagResult += '></i>';
@@ -518,7 +515,7 @@ function card_generate_contents(contents, card_data, options) {
             }
         });
 
-        html = html.replace(tagRegExp, function(){
+        html = html.replace(tagRegExp, function () {
             return tagResults.shift();
         });
 
@@ -581,7 +578,7 @@ function card_generate_back(data, options) {
     var $tmpCardContainer = $('<div style="position:absolute;visibility:hidden;pointer-events:none;"></div>');
     var $tmpCard = $('<div class="card" ' + card_style + '><div class="card-back"><div class="card-back-inner"><div class="card-back-icon"></div></div></div></div>');
     $('#preview-container').append($tmpCardContainer.append($tmpCard));
-    
+
     var $tmpCardInner = $tmpCard.find('.card-back-inner');
     var innerWidth = $tmpCardInner.width();
     var innerHeight = $tmpCardInner.height();
@@ -590,27 +587,24 @@ function card_generate_back(data, options) {
 
     var icon_style = add_size_to_style(style_color, iconSize, iconSize);
 
-	var url = data.background_image;
-	var background_style = "";
-	if (url)
-	{
-		background_style = 'style = "background-image: url(&quot;' + url + '&quot;); background-size: contain; background-position: center; background-repeat: no-repeat;"';
-	}
-	else
-	{
-		background_style = card_generate_color_gradient_style(color, options);
+    var url = data.background_image;
+    var background_style = "";
+    if (url) {
+        background_style = 'style = "background-image: url(&quot;' + url + '&quot;); background-size: contain; background-position: center; background-repeat: no-repeat;"';
     }
-	var icon = card_data_icon_back(data, options);
+    else {
+        background_style = card_generate_color_gradient_style(color, options);
+    }
+    var icon = card_data_icon_back(data, options);
 
     var result = "";
     result += '<div class="card' + ' ' + (options.rounded_corners ? 'rounded-corners' : '') + '" ' + card_style + '>';
     result += '  <div class="card-back" ' + background_style + '>';
-	if (!url)
-	{
-		result += '    <div class="card-back-inner">';
-		result += '      <div class="card-back-icon icon-' + icon + '" ' + icon_style + '></div>';
-		result += '    </div>';
-	}
+    if (!url) {
+        result += '    <div class="card-back-inner">';
+        result += '      <div class="card-back-icon icon-' + icon + '" ' + icon_style + '></div>';
+        result += '    </div>';
+    }
     result += '  </div>';
     result += '</div>';
 
@@ -705,7 +699,7 @@ function card_pages_wrap(pages, options) {
     var result = "";
     for (var i = 0; i < pages.length; ++i) {
         var style = 'style="';
-        if ((options.card_arrangement === "doublesided") &&  (i % 2 === 1)) {
+        if ((options.card_arrangement === "doublesided") && (i % 2 === 1)) {
             style += 'background-color:' + options.background_color + ';';
         } else {
             style += 'background-color:' + options.foreground_color + ';';
@@ -714,13 +708,12 @@ function card_pages_wrap(pages, options) {
         // style += 'padding-right: calc( (' + (parsedPageWidth.number + parsedPageWidth.mu) + ' - ' + options.card_width + ' * ' + options.page_columns + ' ) / 2);';
         style += '"';
         style = add_size_to_style(style, parsedPageWidth.number + parsedPageWidth.mu, parsedPageHeight.number + parsedPageHeight.mu);
-        
         var z = options.page_zoom / 100;
         // var zoomWidth = parsedPageWidth.number * z;
         // var zoomHeight = parsedPageHeight.number * z;
         var zoomStyle = 'style="';
         zoomStyle += 'transform: scale(' + z + ');';
-        if ((options.card_arrangement === "doublesided") &&  (i % 2 === 1)) {
+        if ((options.card_arrangement === "doublesided") && (i % 2 === 1)) {
             zoomStyle += 'flex-direction:' + 'row-reverse' + ';';
         }
         zoomStyle += '"';
