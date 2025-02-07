@@ -250,6 +250,66 @@ function card_element_justify(params, card_data, options) {
     return result;
 }
 
+function card_element_dnd24stats(params, card_data, options) {
+    var stats = [10, 10, 10, 10, 10, 10];
+    var mods = ["", "", "", "", "", ""];
+    var saves = ["", "", "", "", "", ""];
+    for (var i = 0; i < 6; ++i) {
+        var j = 6 + i;
+        stats[i] = parseInt(params[i], 10) || 0;
+        var mod = Math.floor(((stats[i] - 10) / 2));
+        var save = mod;
+        if (j < params.length) {
+            save = parseInt(params[j], 10) || mod;
+        }
+        mods[i] = mod < 0 ? "" + mod : "+" + mod;
+        saves[i] = save < 0 ? "" + save : "+" + save;
+    }
+    var card_font_size_class = card_size_class(card_data, options);
+
+    var result = "";
+    result += '<table class="card-stats24' + card_font_size_class + '">';
+    result += '  <tbody><tr>';
+    result += '    <th class="card-stats24-lname"/>';
+    result += '    <th class="card-stats24-lkey"/>';
+    result += '    <th class="card-stats24-lval">МОД</th>';
+    result += '    <th class="card-stats24-lval">СПС</th>';
+    result += '    <th class="card-stats24-rname"/>';
+    result += '    <th class="card-stats24-rkey"/>';
+    result += '    <th class="card-stats24-rval">МОД</th>';
+    result += '    <th class="card-stats24-rval">СПС</th>';
+    result += '  </tr><tr>';
+    result += '    <td class="card-stats24-lname">СИЛ</td>';
+    result += '    <td class="card-stats24-lkey">' + stats[0] + '</td>';
+    result += '    <td class="card-stats24-lval">' + mods[0] + '</td>';
+    result += '    <td class="card-stats24-lval">' + saves[0] + '</td>';
+    result += '    <td class="card-stats24-rname">ИНТ</td>';
+    result += '    <td class="card-stats24-rkey">' + stats[3] + '</td>';
+    result += '    <td class="card-stats24-rval">' + mods[3] + '</td>';
+    result += '    <td class="card-stats24-rval">' + saves[3] + '</td>';
+    result += '  </tr><tr>';
+    result += '    <td class="card-stats24-lname">ЛОВ</td>';
+    result += '    <td class="card-stats24-lkey">' + stats[1] + '</td>';
+    result += '    <td class="card-stats24-lval">' + mods[1] + '</td>';
+    result += '    <td class="card-stats24-lval">' + saves[1] + '</td>';
+    result += '    <td class="card-stats24-rname">МДР</td>';
+    result += '    <td class="card-stats24-rkey">' + stats[4] + '</td>';
+    result += '    <td class="card-stats24-rval">' + mods[4] + '</td>';
+    result += '    <td class="card-stats24-rval">' + saves[4] + '</td>';
+    result += '  </tr><tr>';
+    result += '    <td class="card-stats24-lname">ТЕЛ</td>';
+    result += '    <td class="card-stats24-lkey">' + stats[2] + '</td>';
+    result += '    <td class="card-stats24-lval">' + mods[2] + '</td>';
+    result += '    <td class="card-stats24-lval">' + saves[2] + '</td>';
+    result += '    <td class="card-stats24-rname">ХАР</td>';
+    result += '    <td class="card-stats24-rkey">' + stats[5] + '</td>';
+    result += '    <td class="card-stats24-rval">' + mods[5] + '</td>';
+    result += '    <td class="card-stats24-rval">' + saves[5] + '</td>';
+    result += '  </tr></tbody>';
+    result += '</table>';
+    return result;
+}
+
 function card_element_dndstats(params, card_data, options) {
     var stats = [10, 10, 10, 10, 10, 10];
     var mods = [0, 0, 0, 0, 0, 0];
@@ -434,6 +494,7 @@ var card_element_generators = {
     boxes: card_element_boxes,
     description: card_element_description,
     dndstats: card_element_dndstats,
+    dnd24stats: card_element_dnd24stats,
     p2e_stats: card_element_p2e_stats,
     p2e_start_trait_section: card_element_start_p2e_trait,
     p2e_trait: card_element_p2e_trait,
